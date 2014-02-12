@@ -17,6 +17,7 @@
     "voxel-highlight" : "maxogden/voxel-highlight",
     "voxel-display-blockdata" : "jroes/voxel-display-blockdata",
     "voxel-blockdata" : "deathcap/voxel-blockdata",
+    "connect-redis": "latest",
     "async" : "latest",
     "painterly-textures" : "latest",
     "heroku-client": "~1.0.0",

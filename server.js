@@ -2,6 +2,7 @@ var Heroku = require('heroku-client');
 
 var browserify = require('connect-browserify');
 var express = require('express');
+var RedisStore = require ('connect-redis')(express);
 var async = require('async');
 var app = express();
 
@@ -42,7 +43,29 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+});
+
+app.configure('development', function () {
   app.use(express.session({ secret: process.env.SESSION_SECRET || 'keyboard cat, lol!' }));
+});  
+
+app.configure('production', function () {
+  var redisUrl = url.parse(process.env.REDISTOGO_URL),
+      redisAuth = redisUrl.auth.split(':');  
+  app.set('redisHost', redisUrl.hostname);
+  app.set('redisPort', redisUrl.port);
+  app.set('redisDb', redisAuth[0]);
+  app.set('redisPass', redisAuth[1]);
+  var sessionStore = new RedisStore({
+    host: app.set('redisHost'),
+    port: app.set('redisPort'),
+    db: app.set('redisDb'),
+    pass: app.set('redisPass')
+  });
+  app.use(express.session({ secret: process.env.SESSION_SECRET || 'keyboard cat, lol!', store: sessionStore, key: 'heroku-voxel.sid' }));
+});  
+
+app.configure(function() {
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(passport.initialize());
