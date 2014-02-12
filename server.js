@@ -113,7 +113,10 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV == "development") {
 }
 
 app.use(express.static(__dirname + '/public'));
-app.listen(3000);
+var port = Number(process.env.PORT || 3000);
+app.listen(port, function() {
+    console.log("Listening on " + port);
+});
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
