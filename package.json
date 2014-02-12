@@ -1,0 +1,30 @@
+{
+  "name": "heroku-voxel",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "foreman start"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "voxel-engine" : "deathcap/voxel-engine",
+    "voxel-trees" : "deathcap/voxel-trees",
+    "voxel-land" : "deathcap/voxel-land",
+    "voxel-player" : "deathcap/voxel-player",
+    "voxel-registry" : "deathcap/voxel-registry",
+    "voxel-highlight" : "maxogden/voxel-highlight",
+    "voxel-display-blockdata" : "jroes/voxel-display-blockdata",
+    "voxel-blockdata" : "deathcap/voxel-blockdata",
+    "async" : "latest",
+    "painterly-textures" : "latest",
+    "heroku-client": "~1.0.0",
+    "express": "~3.4.8",
+    "passport-heroku": "0.0.2",
+    "connect-browserify": "~1.0.0",
+    "browserify": "~3.24.13",
+    "passport": "~0.2.0",
+    "request": "~2.33.0"
+  }
+}
