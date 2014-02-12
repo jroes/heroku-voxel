@@ -50,6 +50,7 @@ app.configure('development', function () {
   app.use(express.session({ secret: process.env.SESSION_SECRET || 'keyboard cat, lol!' }));
 });  
 
+// TODO: Should just use redis in development too.
 app.configure('production', function () {
   var redisUrl = url.parse(process.env.REDISTOGO_URL),
       redisAuth = redisUrl.auth.split(':');  

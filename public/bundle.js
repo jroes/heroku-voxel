@@ -47896,11 +47896,16 @@ request.onload = function() {
     var blockdata = game.plugins.get('voxel-blockdata');
     var data = JSON.parse(request.responseText);
     console.log("Retrieved data for", data.length, "apps.");
+    var slice = 2 * Math.PI / data.length;
+    var radius = 25;
     for (var i = 0; i < data.length; i++) {
+      var angle = slice * i;
+      var x = Math.floor(radius * Math.cos(angle));
+      var z = Math.floor(radius * Math.sin(angle));
       var app = data[i];
       console.log("Placing tree for app", app.name);
       createTree({ 
-        position: { z: 2, y: 2, x: i*4 },
+        position: { z: z, y: 2, x: x },
         height: app.collaborators.length, radius: app.dynos.length/8.0,
         treeType: 'guybrush',
         setBlock: function (pos, value) {
